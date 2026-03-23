@@ -1,39 +1,3 @@
-// const mongoose = require("mongoose");
-
-// const productSchema = new mongoose.Schema(
-//   {
-//     category: {
-//   type: String,
-//   required: true,
-// },
-//     productId: {
-//       type: String,
-//       unique: true,
-//     },
-//     name: {
-//       type: String,
-//       required: true,
-//     },
-//     label: String,
-//     highlight: String,
-//     subHighlight: String,
-//     features: [String],
-//     volume: String,
-//     rating: Number,
-//     reviews: Number,
-//     price: Number,
-//     originalPrice: Number,
-//     image: String,
-//   },
-//   { timestamps: true }
-// );
-
-// module.exports = mongoose.model("Product", productSchema);
-
-
-
-
-
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(

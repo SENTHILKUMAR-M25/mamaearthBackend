@@ -10,26 +10,6 @@ const generateCategoryId = async () => {
   return `CAT-${String(num).padStart(3, "0")}`;
 };
 
-// // ➕ CREATE
-// exports.createCategory = async (req, res) => {
-//   try {
-//     const categoryId = await generateCategoryId();
-
-//     const category = await Category.create({
-//       categoryId,
-//       name: req.body.name,
-//       image: req.file ? req.file.filename : "",
-//     });
-
-//     res.json(category);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-
-
-
 exports.createCategory = async (req, res) => {
   try {
     const categoryId = await generateCategoryId();
