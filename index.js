@@ -16,7 +16,8 @@ app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/categories", require("./routes/categoryRoutes"));
 app.use("/api/subcategories", require("./routes/subcategoryRoutes"));
 app.use("/api/cart", require("./routes/cart"));
-
+app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 // ------------------ DATABASE CONNECTION ------------------
 const connectDB = async () => {
   try {

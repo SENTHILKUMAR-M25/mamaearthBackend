@@ -17,7 +17,11 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    quantity: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     subcategory: String,
     label: String,
     highlight: String,

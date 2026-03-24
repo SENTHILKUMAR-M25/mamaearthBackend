@@ -11,65 +11,33 @@ const generateProductId = async () => {
 };
 
 // ➕ CREATE
-// exports.createProduct = async (req, res) => {
-//   try {
-//     const productId = await generateProductId();
-
-//     const product = await Product.create({
-//       productId,
-//       name: req.body.name,
-
-//       // ✅ ADD THIS LINE
-//       category: req.body.category,
-
-//       subcategory: req.body.subcategory,
-//       label: req.body.label,
-//       highlight: req.body.highlight,
-//       subHighlight: req.body.subHighlight,
-//       features: req.body.features ? req.body.features.split(",") : [],
-//       volume: req.body.volume,
-//       rating: req.body.rating,
-//       reviews: req.body.reviews,
-//       price: req.body.price,
-//       originalPrice: req.body.originalPrice,
-//       image: req.file ? req.file.filename : "",
-//     });
-
-//     res.json(product);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
 exports.createProduct = async (req, res) => {
   try {
     const productId = await generateProductId();
 
     const product = await Product.create({
       productId,
-
       name: req.body.name,
-
-      // ✅ MUST SAVE CATEGORY
       category: req.body.category || "",
-
       subcategory: req.body.subcategory || "",
       label: req.body.label || "",
       highlight: req.body.highlight || "",
       subHighlight: req.body.subHighlight || "",
 
-      // ✅ Convert features safely
       features: req.body.features
-        ? req.body.features.split(",").map(f => f.trim())
+        ? req.body.features.split(",").map((f) => f.trim())
         : [],
 
       volume: req.body.volume || "",
 
-      // ✅ Convert numbers properly
       rating: Number(req.body.rating) || 0,
       reviews: Number(req.body.reviews) || 0,
+
       price: Number(req.body.price) || 0,
       originalPrice: Number(req.body.originalPrice) || 0,
+
+      // ✅ ADD THIS
+      quantity: Number(req.body.quantity) || 0,
 
       image: req.file ? req.file.filename : "",
     });
@@ -79,7 +47,6 @@ exports.createProduct = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 
 // 📥 READ ALL
 exports.getProducts = async (req, res) => {
@@ -93,33 +60,6 @@ exports.getProduct = async (req, res) => {
   res.json(product);
 };
 
-// exports.updateProduct = async (req, res) => {
-//   try {
-//     const updated = await Product.findByIdAndUpdate(
-//       req.params.id,
-//       {
-//         ...req.body,
-
-//         // ✅ ensure features array
-//         ...(req.body.features && {
-//           features: req.body.features.split(","),
-//         }),
-
-//         // ✅ ensure category update
-//         category: req.body.category,
-
-//         ...(req.file && { image: req.file.filename }),
-//       },
-//       { new: true }
-//     );
-
-//     res.json(updated);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// ❌ DELETE
 
 exports.updateProduct = async (req, res) => {
   try {
@@ -127,22 +67,26 @@ exports.updateProduct = async (req, res) => {
       req.params.id,
       {
         name: req.body.name,
-        category: req.body.category, // ✅ MUST ADD
+        category: req.body.category,
         subcategory: req.body.subcategory,
         label: req.body.label,
         highlight: req.body.highlight,
         subHighlight: req.body.subHighlight,
 
         features: req.body.features
-          ? req.body.features.split(",").map(f => f.trim())
+          ? req.body.features.split(",").map((f) => f.trim())
           : [],
 
         volume: req.body.volume,
 
         rating: Number(req.body.rating) || 0,
         reviews: Number(req.body.reviews) || 0,
+
         price: Number(req.body.price) || 0,
         originalPrice: Number(req.body.originalPrice) || 0,
+
+        // ✅ ADD THIS
+        quantity: Number(req.body.quantity) || 0,
 
         ...(req.file && { image: req.file.filename }),
       },

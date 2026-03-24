@@ -19,7 +19,7 @@ userSchema.pre("save", async function() {
         const lastNumber = parseInt(parts[2], 10);
         newIdNumber = lastNumber + 1;
       }
-      this.userId = `userId-MME-${String(newIdNumber).padStart(3, "0")}`;
+      this.userId = `MME-${String(newIdNumber).padStart(3, "0")}`;
     } catch (err) {
       console.error("Error generating userId:", err);
       throw err; // Let Mongoose handle the error
